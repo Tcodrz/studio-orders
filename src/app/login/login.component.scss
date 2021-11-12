@@ -1,0 +1,28 @@
+
+.login-component-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3rem;
+
+
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #a9a9a9;
+    border-radius: 3px;
+    box-shadow: 0 0 10px #a9a9a9;
+    padding: 2rem 1rem;
+    width: 25vw;
+
+    h1 {
+      text-align: center;
+    }
+
+    .error-message {
+      color: red;
+      margin-bottom: 1rem;
+    }
+
+  }
+}

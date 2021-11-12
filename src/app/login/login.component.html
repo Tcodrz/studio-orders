@@ -1,0 +1,39 @@
+
+<div class="login-component-container">
+
+  <form class="login-form" [formGroup]="loginForm">
+
+    <h1>כניסה</h1>
+
+    <mat-form-field appearance="legacy">
+      <mat-label>שם משתמש</mat-label>
+      <input type="text" matInput formControlName="username">
+    </mat-form-field>
+
+    <mat-form-field appearance="legacy">
+      <mat-label>סיסמא</mat-label>
+      <input type="password" matInput  formControlName="password">
+    </mat-form-field>
+
+    <ng-container *ngIf="loginError">
+      <ng-template [ngTemplateOutlet]="loginErrorMsg" ></ng-template>
+    </ng-container>
+
+    <button type="submit" mat-raised-button color="primary">היכנס</button>
+
+  </form>
+
+
+
+</div>
+
+
+<ng-template #loginErrorMsg>
+
+  <mat-card class="error-message">
+    <mat-card-content>
+      אחד הפרטים שהזנת לא נכונים
+    </mat-card-content>
+  </mat-card>
+
+</ng-template>

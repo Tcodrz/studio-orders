@@ -1,0 +1,16 @@
+{
+  "orders": [
+    {
+      "id": 1,
+      "orderNumber": "S21-11007"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "Admin",
+      "email": "admin@studio-orders.com",
+      "password": "1234"
+    }
+  ]
+}
