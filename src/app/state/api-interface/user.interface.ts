@@ -1,6 +1,6 @@
-import { BaseEntity } from './order.interface';
 
-export interface User extends BaseEntity {
-  name: string;
+export interface User {
+  id: string | number;
+  username: string;
   password?: string;
 }

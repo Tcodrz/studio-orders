@@ -1,8 +1,9 @@
+import { AppGuard } from './../shared/guards/app.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { OrdersComponent } from './orders.component';
 
-const routes: Routes = [{ path: '', component: OrdersComponent }];
+const routes: Routes = [{ path: '', component: OrdersComponent, canActivate: [AppGuard]}];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

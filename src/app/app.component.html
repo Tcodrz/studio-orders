@@ -1,16 +1,14 @@
 
 <ng-container *ngIf="loggedInUser$ | async; else login">
-  <mat-toolbar class="example-header" color="primary">Header</mat-toolbar>
-  <mat-sidenav-container class="example-container">
-    <mat-sidenav mode="side" position="end" opened class="example-sidenav">
-    </mat-sidenav>
-    <mat-sidenav-content>
-      <router-outlet></router-outlet>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+  <app-navbar>
+    <app-loader></app-loader>
+    <router-outlet></router-outlet>
+  </app-navbar>
 </ng-container>
 
 <ng-template #login>
-  <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
+    <app-loader></app-loader>
 </ng-template>
 
+<app-error-handler></app-error-handler>

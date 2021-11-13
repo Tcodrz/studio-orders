@@ -1,0 +1,33 @@
+
+
+<app-toolbar
+  [sidenavToggleIcon]="icons.faMicrophoneAlt"
+  [logoutIcon]="icons.faSignOutAlt"
+  (logout)="logout()"
+  (sidenavToggle)="sidenavOpened = !sidenavOpened"
+></app-toolbar>
+
+<mat-sidenav-container class="container" [hasBackdrop]="false">
+
+  <mat-sidenav
+    mode="over"
+    position="end"
+    [opened]="sidenavOpened"
+    class="sidenav">
+    <div class="sidenav-links">
+      <div class="sidenav-link" matRipple
+     [matRippleRadius]="0"
+     [matRippleColor]="'rgba(105, 52, 197, 0.652)'"
+          *ngFor="let item of sidenavItems">
+          {{ item.value }}
+          <fa-icon [icon]="item.icon" class="sidenav-link-icon"></fa-icon>
+      </div>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div class="router-container">
+      <ng-content></ng-content>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

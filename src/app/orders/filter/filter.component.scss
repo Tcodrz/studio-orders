@@ -1,0 +1,16 @@
+.filter-component {
+
+  .orders-filter-container {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .search-btn-container {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
+}

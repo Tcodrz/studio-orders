@@ -1,3 +1,6 @@
+import { AppState } from 'src/app/state';
+import { Store } from '@ngrx/store';
+import { loaded, loading } from './../loader/loader.actions';
 import { Order } from './../api-interface/order.interface';
 import { ApiService } from './../services/api.service';
 import { loadOrders, ordersLoaded } from './orders.actions';
@@ -12,9 +15,11 @@ export class OrdersEffects {
   loadOrders$ = createEffect(() => this.actions$.pipe(
     ofType(loadOrders),
     mergeMap(() => this.api.getAllOrders().pipe(
-      map((orders: Order[]) => (ordersLoaded({payload: orders}))),
+      map((orders: Order[]) => {
+        return ordersLoaded({payload: orders})
+      }),
       catchError(() => EMPTY)
-    ))
+      )),
   ))
 
 

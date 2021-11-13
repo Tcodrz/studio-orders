@@ -15,25 +15,9 @@
       <input type="password" matInput  formControlName="password">
     </mat-form-field>
 
-    <ng-container *ngIf="loginError">
-      <ng-template [ngTemplateOutlet]="loginErrorMsg" ></ng-template>
-    </ng-container>
-
-    <button type="submit" mat-raised-button color="primary">היכנס</button>
+    <button type="submit" mat-raised-button color="primary" [disabled]="disableButton">היכנס</button>
 
   </form>
-
-
-
 </div>
 
 
-<ng-template #loginErrorMsg>
-
-  <mat-card class="error-message">
-    <mat-card-content>
-      אחד הפרטים שהזנת לא נכונים
-    </mat-card-content>
-  </mat-card>
-
-</ng-template>

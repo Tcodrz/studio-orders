@@ -4,35 +4,28 @@ import { User } from './../api-interface/user.interface';
 
 
 export interface UserState {
-  users: User[];
-  user: User;
+  user: Partial<User>;
   isLoggedIn: boolean;
 }
 
 const initialState: UserState = {
-  users: [],
   user: {
     id: -1,
-    name: 'INITIAL USER'
+    username: '',
   },
   isLoggedIn: false
 };
 
 const _userReducer = createReducer(
   initialState,
-  on(UserActions.usersLoaded, (state, action) => {
+  on(UserActions.userLogin, (state, action) => {
     return {
-      users: action.payload,
-      user: state.user,
-      isLoggedIn: state.isLoggedIn
-    }
-  }),
-  on(UserActions.loginSuccess, (state, action) => {
-    return {
-      users: state.users,
       user: action.payload,
       isLoggedIn: true
     }
+  }),
+  on(UserActions.logout, (state, action) => {
+    return initialState
   })
 );
 

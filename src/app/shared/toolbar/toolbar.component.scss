@@ -1,0 +1,30 @@
+.toolbar {
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .logo-icon {
+    font-size: 2rem;
+  }
+
+  .animate {
+    animation: rotate .5s linear;
+  }
+
+
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    85% {
+      transform: rotate(400deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+}
+
+}

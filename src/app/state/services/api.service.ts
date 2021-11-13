@@ -1,8 +1,15 @@
 import { User } from './../api-interface/user.interface';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map, catchError } from 'rxjs';
 import { Order } from '../api-interface/order.interface';
+
+export interface ApiResponse {
+  data: any;
+  error: boolean;
+  message: string;
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,15 +20,16 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.API_ENDPOINT + 'users');
-  }
-
-  userLogin(user: Partial<User>): Observable<User> {
-    return this.http.get<User>(this.API_ENDPOINT + 'users/' + user.id);
-  }
 
   getAllOrders(): Observable<Order[]> {
-    return this.http.get<Order[]>(this.API_ENDPOINT + 'orders');
+    return this.http.get<ApiResponse>(this.API_ENDPOINT + 'orders').pipe(
+      map(res => res.error ? [] : res.data)
+    );
   }
+
+  authenticateUser(user: Partial<User>): Observable<User | null> {
+    return this.http.post<ApiResponse>(this.API_ENDPOINT + 'auth', user)
+    .pipe(map(res => res.error ? null : res.data ));
+  }
+
 }
