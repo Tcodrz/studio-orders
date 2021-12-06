@@ -1,5 +1,9 @@
 <mat-toolbar class="toolbar" color="primary">
-  <button mat-icon-button (click)="sidenavToggle.emit(); animateButton(sideNavMenu)" #sideNavMenu id="sideNavBtn">
+  <button mat-icon-button
+          (click)="sidenavToggle.emit();
+          animateButton(sideNavMenu)"
+          #sideNavMenu
+          id="sideNavBtn">
     <fa-icon [icon]="sidenavToggleIcon" class="logo-icon"></fa-icon>
   </button>
 

@@ -1,12 +1,11 @@
-import { loadOrders } from './../state/orders/orders.actions';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
 import { AppState } from '../state';
 import { Order } from './../state/api-interface/order.interface';
 import * as OrderFilterActions from './../state/orders-filter/orders-filter.actions';
+import { loadOrders } from './../state/orders/orders.actions';
 import { FilterObject } from './filter/filter.component';
-import { OrdersService } from './services/orders.service';
 
 @Component({
   selector: 'app-orders',
