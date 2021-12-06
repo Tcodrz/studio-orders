@@ -17,7 +17,8 @@ export class OrdersComponent {
   filterObject$: Observable<FilterObject> = this.store.select('filter').pipe(map(filterState => filterState.filter));
 
   constructor(
-    private store: Store<AppState>) {
+    private store: Store<AppState>
+  ) {
     this.store.dispatch(loadOrders());
   }
   handleFilterEvent(filterObject: FilterObject): void {

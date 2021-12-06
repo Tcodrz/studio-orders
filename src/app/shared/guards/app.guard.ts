@@ -21,7 +21,7 @@ export class AppGuard implements CanActivate {
 
   canActivate(): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    const user = this.cache.getItem<Partial<User>>('user');
+    const user = this.cache.getItem<User>('user');
 
 
     return this.store.select('user')

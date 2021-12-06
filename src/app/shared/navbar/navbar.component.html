@@ -3,14 +3,15 @@
 <app-toolbar
   [sidenavToggleIcon]="icons.faMicrophoneAlt"
   [logoutIcon]="icons.faSignOutAlt"
+  [user]="user"
   (logout)="logout()"
-  (sidenavToggle)="sidenavOpened = !sidenavOpened"
+  (sidenavToggle)="toggle()"
 ></app-toolbar>
 
 <mat-sidenav-container class="container" [hasBackdrop]="false">
 
   <mat-sidenav
-    mode="over"
+    [mode]="sidenavMode"
     position="end"
     [opened]="sidenavOpened"
     class="sidenav">

@@ -11,11 +11,9 @@ import { UserState } from './state/user/user.reducer';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit{
-
   loggedInUser$: Observable<boolean> = of(false);
 
   constructor(private store: Store<AppState>) { }
-
   ngOnInit(): void {
     this.loggedInUser$ = this.store.select('user').pipe(
       map((userState: UserState) => userState.isLoggedIn)
