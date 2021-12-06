@@ -10,7 +10,6 @@
         <div class="filter-component-inputs">
           <ng-template [ngTemplateOutlet]="filterInputs"></ng-template>
         </div>
-
         <div class="filter-component-actions">
           <div class="filter-component-chips-list">
             <app-chips [list]="filtersList" (removeActiveFilter)="removeActiveFilter($event, filterObject)"></app-chips>

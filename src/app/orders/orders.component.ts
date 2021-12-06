@@ -13,28 +13,18 @@ import { OrdersService } from './services/orders.service';
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.scss']
 })
-export class OrdersComponent implements OnInit {
-
+export class OrdersComponent {
   orders$: Observable<Order[]> = this.store.select('orders').pipe(map(ordersState => ordersState.orders));
   filterObject$: Observable<FilterObject> = this.store.select('filter').pipe(map(filterState => filterState.filter));
 
   constructor(
-    private store: Store<AppState>,
-    private ordersService: OrdersService
-  ) {
+    private store: Store<AppState>) {
     this.store.dispatch(loadOrders());
   }
-
-  ngOnInit(): void {
-
-  }
-
   handleFilterEvent(filterObject: FilterObject): void {
     this.store.dispatch(OrderFilterActions.update({ payload: filterObject }));
   }
-
   handleFilterResetEvent(): void {
     this.store.dispatch(OrderFilterActions.reset());
   }
-
 }

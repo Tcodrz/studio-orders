@@ -3,11 +3,4 @@
   (onFilter)="handleFilterEvent($event)"
   (onReset)="handleFilterResetEvent()"
 ></app-orders-filter>
-
 <app-orders-list [ordersList]="orders$" ></app-orders-list>
-<!--
-<pre>
-
-  {{ orders$ | async | json }}
-
-</pre> -->
