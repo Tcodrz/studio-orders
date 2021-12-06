@@ -1,12 +1,12 @@
-import { map, Observable, of } from 'rxjs';
-import { User } from './../../state/api-interface/user.interface';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { map, Subscription } from 'rxjs';
 import { AppState } from 'src/app/state';
 import { logout } from 'src/app/state/user/user.actions';
 import { IconsService } from './../../material/icons.service';
+import { User } from './../../state/api-interface/user.interface';
 
 interface SidenavItem {
   value: string;
@@ -18,7 +18,7 @@ interface SidenavItem {
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit{
+export class NavbarComponent implements OnInit, OnDestroy{
   sidenavOpened: boolean = true;
   sidenavMode: 'push' | 'over' = 'push';
   sidenavItems: SidenavItem[] = [
@@ -44,6 +44,7 @@ export class NavbarComponent implements OnInit{
     }
   ];
   user!: User;
+  private userSubscription!: Subscription;
 
   constructor(
     private store: Store<AppState>,
@@ -52,13 +53,17 @@ export class NavbarComponent implements OnInit{
     public icons: IconsService
   ) { }
   ngOnInit(): void {
-    this.store.pipe(select('user'),map((userState) => userState.user))
-    .subscribe(user => this.user = user);
-
+    this.userSubscription = this.store.pipe(
+      select('user'),
+      map((userState) => userState.user)
+    ).subscribe(user => this.user = user);
     this.sidenavOpened = this.deviceDetector.isDesktop();
     this.sidenavMode = this.deviceDetector.isMobile() ? 'over' : 'push';
   }
-  logout() {
+  ngOnDestroy(): void {
+    this.userSubscription.unsubscribe();
+  }
+  logout(): void {
     this.store.dispatch(logout());
     this.router.navigate(['/login']);
   }
