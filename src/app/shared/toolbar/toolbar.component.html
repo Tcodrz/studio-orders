@@ -7,6 +7,10 @@
     <fa-icon [icon]="sidenavToggleIcon" class="logo-icon"></fa-icon>
   </button>
 
+  <div class="toolbar-center-content">
+    <h1> {{ user.name | titlecase }} </h1>
+  </div>
+
   <button mat-icon-button (click)="logout.emit()" class="icon-container">
     <fa-icon [icon]="logoutIcon" class="logo-icon"></fa-icon>
   </button>

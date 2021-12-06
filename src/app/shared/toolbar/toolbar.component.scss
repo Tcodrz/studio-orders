@@ -12,6 +12,12 @@
     animation: rotate .5s linear;
   }
 
+  .toolbar-center-content {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+  }
+
 
   @keyframes rotate {
     0% {

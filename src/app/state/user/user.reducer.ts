@@ -4,14 +4,14 @@ import { User } from './../api-interface/user.interface';
 
 
 export interface UserState {
-  user: Partial<User>;
+  user: User;
   isLoggedIn: boolean;
 }
 
 const initialState: UserState = {
   user: {
     id: -1,
-    username: '',
+    name: '',
   },
   isLoggedIn: false
 };

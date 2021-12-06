@@ -1,3 +1,4 @@
+import { User } from './../../state/api-interface/user.interface';
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, TemplateRef, ViewChild } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 
@@ -10,6 +11,7 @@ import { MatButton } from '@angular/material/button';
 export class ToolbarComponent {
   @Input() sidenavToggleIcon: any;
   @Input() logoutIcon: any;
+  @Input() user!: User;
   @Output() logout: EventEmitter<void> = new EventEmitter()
   @Output() sidenavToggle: EventEmitter<void> = new EventEmitter();
   animateButton(element: MatButton) {
