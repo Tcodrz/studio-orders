@@ -1,7 +1,7 @@
 
 export interface Order {
   _id: string;
-  orderNumber: string;
+  id: string;
   price : {
     collection: [];
     detailed: boolean;
@@ -20,7 +20,28 @@ export interface Order {
   numberOfVariations: number;
   usagePeriod: number;
   music: string;
-  customer: object;
-  advertiser: object;
-  contact: object;
+  customer: Customer;
+  advertiser: Advertiser;
+  contact: Contact;
+  narrators: Narrator[];
+}
+
+type Narrator = {
+  id: string | number;
+  name: string;
+}
+
+type Advertiser = {
+  id: number | string;
+  name: string;
+}
+
+type Customer = {
+  id: number| string;
+  name: string;
+}
+
+type Contact = {
+  id: number | string;
+  name: string;
 }

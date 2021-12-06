@@ -8,6 +8,9 @@ import {
   faHeadphones,
   faFileSignature,
   faSignOutAlt,
+  faSearch,
+  faCheck,
+  faTrashRestore,
   faUsers} from '@fortawesome/free-solid-svg-icons';
 
 @Injectable({
@@ -24,4 +27,7 @@ export class IconsService {
   faheadphones = faHeadphones;
   faStream = faStream;
   faSignOutAlt = faSignOutAlt;
+  faSearch = faSearch;
+  faTrashRestore = faTrashRestore;
+  faCheck = faCheck;
 }

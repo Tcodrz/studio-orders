@@ -1,3 +1,4 @@
+import { FilterState, ordersFilterReducer } from './orders-filter/order-filter.reducer';
 import { ActionReducerMap } from '@ngrx/store';
 import { errorReducer, ErrorState } from './error/error.reducer';
 import { loaderReducer, LoaderState } from './loader/loader.reducer';
@@ -8,7 +9,8 @@ export interface AppState {
   orders: OrderState;
   user: UserState;
   error: ErrorState;
-  loader: LoaderState
+  loader: LoaderState;
+  filter: FilterState;
 }
 
 
@@ -16,5 +18,6 @@ export const reducers: ActionReducerMap<AppState> = {
   orders: orderReducer,
   user: userReducer,
   error: errorReducer,
-  loader: loaderReducer
+  loader: loaderReducer,
+  filter: ordersFilterReducer
 }

@@ -1,7 +1,11 @@
-import { FilterObject } from './filter/filter.component';
-import { Order } from './../state/api-interface/order.interface';
-import { Observable } from 'rxjs';
+import { loadOrders } from './../state/orders/orders.actions';
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { map, Observable } from 'rxjs';
+import { AppState } from '../state';
+import { Order } from './../state/api-interface/order.interface';
+import * as OrderFilterActions from './../state/orders-filter/orders-filter.actions';
+import { FilterObject } from './filter/filter.component';
 import { OrdersService } from './services/orders.service';
 
 @Component({
@@ -11,16 +15,26 @@ import { OrdersService } from './services/orders.service';
 })
 export class OrdersComponent implements OnInit {
 
-  orders$: Observable<Order[]> = this.ordersService.orders$;
+  orders$: Observable<Order[]> = this.store.select('orders').pipe(map(ordersState => ordersState.orders));
+  filterObject$: Observable<FilterObject> = this.store.select('filter').pipe(map(filterState => filterState.filter));
 
-  constructor(private ordersService: OrdersService) { }
+  constructor(
+    private store: Store<AppState>,
+    private ordersService: OrdersService
+  ) {
+    this.store.dispatch(loadOrders());
+  }
 
   ngOnInit(): void {
 
   }
 
   handleFilterEvent(filterObject: FilterObject): void {
-    console.log(filterObject);
+    this.store.dispatch(OrderFilterActions.update({ payload: filterObject }));
+  }
+
+  handleFilterResetEvent(): void {
+    this.store.dispatch(OrderFilterActions.reset());
   }
 
 }

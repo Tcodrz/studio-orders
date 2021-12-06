@@ -22,4 +22,9 @@ describe('FilterComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should reset filters list', () => {
+    component.resetFiltersState();
+    expect(component.filtersList).toEqual([])
+  })
 });

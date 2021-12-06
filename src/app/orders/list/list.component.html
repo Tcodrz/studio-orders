@@ -1,0 +1,114 @@
+<div class="orders-list-component">
+  <table class="table">
+    <tr class="table-head">
+      <td>מספר הזמנה</td>
+      <td>תאריך</td>
+      <td>פרסומאי</td>
+      <td>לקוח</td>
+      <td>סטאטוס</td>
+      <td>מחיר</td>
+      <td>הערות</td>
+      <td>הערות הנהלת חשבונות</td>
+      <td>קריינים</td>
+      <td>עלות קריינים</td>
+      <td>מוזיקה</td>
+      <td>פעולות</td>
+    </tr>
+    <tr *ngFor="let order of ordersList | async" class="table-row">
+      <td> {{ order.id }} </td>
+      <td> {{ order.date | date }} </td>
+      <td> {{ order.advertiser.name }} </td>
+      <td> {{ order.customer.name }} </td>
+      <td> {{ order.status }} </td>
+      <td> {{ order.price.fullPrice | currency : 'ILS'}} </td>
+      <td> {{ order.generalNotes | slice : 0 : 25 }} </td>
+      <td> {{ order.bookkeepingNotes }} </td>
+      <td>
+        <span *ngFor="let narrator of order.narrators; let i = index">
+          {{ narrator.name }} {{ i === order.narrators.length - 1 ? '' : ',' }}
+        </span>
+      </td>
+      <td>{{ order.narratorsPrice | currency : 'ILS' }}</td>
+      <td>
+        <fa-icon [icon]="icons.faCheck"></fa-icon>
+      </td>
+      <td>
+        <ng-template [ngTemplateOutlet]="orderActions"></ng-template>
+      </td>
+    </tr>
+  </table>
+
+  <!--
+  <mat-accordion>
+    <mat-expansion-panel showToggle *ngFor="let order of ordersList | async">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+
+          {{ order.orderNumber }}
+        </mat-panel-title>
+
+        <mat-panel-title>
+          {{ order.date | date }}
+        </mat-panel-title>
+
+        <mat-panel-title>
+          {{ order.advertiser.name }}
+        </mat-panel-title>
+
+        <mat-panel-title>
+
+          {{ order.customer.name }}
+        </mat-panel-title>
+
+        <mat-panel-title>
+
+          {{ order.status }}
+        </mat-panel-title>
+
+        <mat-panel-title>
+          {{ order.price.fullPrice }}
+        </mat-panel-title>
+
+      </mat-expansion-panel-header>
+      <div class="order-desc-container">
+        <div class="order-desc-col">
+          מספר ורסיות: 2
+        </div>
+        <div class="order-desc-col">
+          מספר נגזרות: 0
+        </div>
+      </div>
+      <div class="order-desc-container">
+        <div class="order-desc-col">
+          הערות: google
+        </div>
+        <div class="order-desc-col">
+          הערות הנהלת חשבונות:
+        </div>
+      </div>
+      <div class="order-desc-container">
+        <div class="order-desc-col">
+          קריינים: דור יחזקאל
+        </div>
+        <div class="order-desc-col">
+          עלות קריינים: 800
+        </div>
+        <ng-template [ngTemplateOutlet]="orderActions"></ng-template>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion> -->
+</div>
+
+<ng-template #orderActions>
+  <div class="order-actions-group">
+    <button class="order-action-btn" mat-raised-button mat-icon-button color="primary">
+      <mat-icon>print</mat-icon>
+    </button>
+    <button class="order-action-btn" mat-raised-button mat-icon-button color="accent">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button class="order-action-btn" mat-raised-button mat-icon-button color="warn">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</ng-template>

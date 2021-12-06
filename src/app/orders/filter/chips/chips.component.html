@@ -1,0 +1,13 @@
+<mat-chip-list>
+  <mat-chip class="filter-chip"
+    *ngFor="let item of filtersList"
+    [removable]="true"
+    (removed)="removeActiveFilter.emit(item)">
+
+    {{ translateKey(item.key) }} : {{ item.value }}
+
+    <button matChipRemove class="filter-chip-remove-btn">
+      <mat-icon>cancel</mat-icon>
+    </button>
+  </mat-chip>
+</mat-chip-list>

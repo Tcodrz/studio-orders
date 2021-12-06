@@ -1,21 +1,37 @@
 <div class="filter-component">
   <mat-accordion>
     <mat-expansion-panel showToggle [expanded]="true">
+
       <mat-expansion-panel-header>
-        <mat-panel-title>
-          חיפוש
-          <!-- <h1>
-        </h1> -->
-        </mat-panel-title>
+        <mat-panel-title>חיפוש</mat-panel-title>
       </mat-expansion-panel-header>
-      <form (ngSubmit)="onFilter.emit(filterObject)">
-        <div class="orders-filter-container">
+
+      <form (ngSubmit)="onSubmit()">
+        <div class="filter-component-inputs">
           <ng-template [ngTemplateOutlet]="filterInputs"></ng-template>
         </div>
-        <div class="search-btn-container">
-          <button type="submit" mat-raised-button mat-icon-button color="primary">
-            <mat-icon>search</mat-icon>
-          </button>
+
+        <div class="filter-component-actions">
+          <div class="filter-component-chips-list">
+            <app-chips [list]="filtersList" (removeActiveFilter)="removeActiveFilter($event, filterObject)"></app-chips>
+          </div>
+
+          <div class="action-btn-container">
+            <button type="submit"
+              mat-raised-button
+              mat-icon-button
+              color="accent">
+              <fa-icon [icon]="icons.faSearch"></fa-icon>
+            </button>
+            <button type="button"
+              class="action-btn-reset"
+              color="warn"
+              mat-raised-button
+              mat-icon-button
+              (click)="resetFiltersState()">
+              <fa-icon [icon]="icons.faTrashRestore"></fa-icon>
+            </button>
+          </div>
         </div>
       </form>
     </mat-expansion-panel>
@@ -30,54 +46,31 @@
   <mat-form-field appearance="fill">
     <mat-label>מספר הזמנה</mat-label>
     <input matInput type="text" [(ngModel)]="filterObject.orderNumber">
-    <button *ngIf="filterObject.orderNumber" matSuffix mat-icon-button aria-label="Clear"
-      (click)="filterObject.orderNumber = ''">
-      <mat-icon>close</mat-icon>
-    </button>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     <mat-label>פרסומאי</mat-label>
     <input matInput type="text" [(ngModel)]="filterObject.advertiser">
-    <button *ngIf="filterObject.advertiser" matSuffix mat-icon-button aria-label="Clear"
-      (click)="filterObject.advertiser = ''">
-      <mat-icon>close</mat-icon>
-    </button>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     <mat-label>לקוח</mat-label>
     <input matInput type="text" [(ngModel)]="filterObject.customer">
-    <button *ngIf="filterObject.customer" matSuffix mat-icon-button aria-label="Clear"
-      (click)="filterObject.customer = ''">
-      <mat-icon>close</mat-icon>
-    </button>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     <mat-label>קריין</mat-label>
     <input matInput type="text" [(ngModel)]="filterObject.narrator">
-    <button *ngIf="filterObject.narrator" matSuffix mat-icon-button aria-label="Clear"
-      (click)="filterObject.narrator = ''">
-      <mat-icon>close</mat-icon>
-    </button>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     <mat-label>ממחיר</mat-label>
     <input matInput type="number" [(ngModel)]="filterObject.fromPrice">
-    <button *ngIf="filterObject.fromPrice" matSuffix mat-icon-button aria-label="Clear"
-      (click)="filterObject.fromPrice = null">
-      <mat-icon>close</mat-icon>
-    </button>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
     <mat-label>עד מחיר</mat-label>
     <input matInput type="number" [(ngModel)]="filterObject.toPrice">
-    <button *ngIf="filterObject.toPrice" matSuffix mat-icon-button (click)="filterObject.toPrice = null">
-      <mat-icon>close</mat-icon>
-    </button>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
