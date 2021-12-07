@@ -1,4 +1,4 @@
-import * as OrdersActions  from './orders.actions';
+import * as OrdersActions from './orders.actions';
 import { Action, createReducer, on } from '@ngrx/store';
 import { Order } from './../api-interface/order.interface';
 

@@ -18,7 +18,7 @@ export interface FilterObject {
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [ OrdersFilterService ]
+  providers: [OrdersFilterService]
 })
 export class FilterComponent {
   @Input() set filterState(val: FilterObject | null) {

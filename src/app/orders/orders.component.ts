@@ -6,6 +6,7 @@ import { Order } from './../state/api-interface/order.interface';
 import * as OrderFilterActions from './../state/orders-filter/orders-filter.actions';
 import { loadOrders } from './../state/orders/orders.actions';
 import { FilterObject } from './filter/filter.component';
+import { OrdersService } from './services/orders.service';
 
 @Component({
   selector: 'app-orders',
@@ -13,14 +14,15 @@ import { FilterObject } from './filter/filter.component';
   styleUrls: ['./orders.component.scss']
 })
 export class OrdersComponent {
-  orders$: Observable<Order[]> = this.store.select('orders').pipe(map(ordersState => ordersState.orders));
   filterObject$: Observable<FilterObject> = this.store.select('filter').pipe(map(filterState => filterState.filter));
 
   constructor(
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private ordersService: OrdersService
   ) {
     this.store.dispatch(loadOrders());
   }
+  get orders$(): Observable<Order[]> { return this.ordersService.getfilteredOrders(); };
   handleFilterEvent(filterObject: FilterObject): void {
     this.store.dispatch(OrderFilterActions.update({ payload: filterObject }));
   }

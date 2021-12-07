@@ -8,7 +8,7 @@ export interface FilterState {
   filter: FilterObject;
 }
 
-const initialState: FilterState = {
+export const initialState: FilterState = {
   filter: {
     fromDate: DateService.getDate('yyyymmdd', { monthStart: true }),
     toDate: DateService.getDate('yyyymmdd', { monthEnd: true }),
@@ -28,7 +28,7 @@ const _filterReducer = createReducer(
       filter: action.payload
     }
   }),
-  on(FilterActions.reset, (state, action) =>  {
+  on(FilterActions.reset, (state, action) => {
     return initialState
   })
 );

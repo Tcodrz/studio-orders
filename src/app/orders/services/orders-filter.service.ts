@@ -23,7 +23,6 @@ export class OrdersFilterService {
       orderNumber: ''
     }
   }
-
   /**
    * Removes active filter from filters object
    * @param item active filter to remove
@@ -47,7 +46,6 @@ export class OrdersFilterService {
     }
     return newFilterObject;
    }
-
   /**
    * Takes a filter object and maps it to array of active filters
    * @param filterObject Filters object to construct a list from
@@ -68,8 +66,6 @@ export class OrdersFilterService {
     }
     return filtersList;
   }
-
-
   /**
    * Takes a list of active filters
    * Adds or removes the value from the list
@@ -96,5 +92,4 @@ export class OrdersFilterService {
     }
     return newList;
   }
-
 }
