@@ -28,7 +28,7 @@ const _filterReducer = createReducer(
       filter: action.payload
     }
   }),
-  on(FilterActions.reset, (state, action) => {
+  on(FilterActions.reset, () => {
     return initialState
   })
 );

@@ -1,10 +1,10 @@
-import { map, of, Observable } from 'rxjs';
-import { Store, select } from '@ngrx/store';
-import { FilterObject } from './../filter/filter.component';
+import { Injectable } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { map, Observable } from 'rxjs';
+import { AppState } from 'src/app/state';
 import { DateService } from './../../shared/services/date.service';
 import { Order } from './../../state/api-interface/order.interface';
-import { Injectable } from '@angular/core';
-import { AppState } from 'src/app/state';
+import { FilterObject } from './../filter/filter.component';
 
 
 const initialFilter: FilterObject = {

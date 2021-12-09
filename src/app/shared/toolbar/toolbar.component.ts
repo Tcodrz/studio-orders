@@ -1,6 +1,6 @@
-import { User } from './../../state/api-interface/user.interface';
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, TemplateRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatButton } from '@angular/material/button';
+import { User } from './../../state/api-interface/user.interface';
 
 @Component({
   selector: 'app-toolbar',

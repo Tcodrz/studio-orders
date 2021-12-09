@@ -10,7 +10,7 @@ import { LoginService } from './services/login.service';
 export class LoginComponent {
 
   loginForm: FormGroup;
-  disableButton: boolean = true;
+  disableButton = true;
 
   @HostListener('input') oninput() {
     if (this.loginForm.valid)

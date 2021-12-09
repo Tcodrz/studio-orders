@@ -24,7 +24,7 @@ const _userReducer = createReducer(
       isLoggedIn: true
     }
   }),
-  on(UserActions.logout, (state, action) => {
+  on(UserActions.logout, () => {
     return initialState
   })
 );

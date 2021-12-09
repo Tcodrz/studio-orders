@@ -1,12 +1,12 @@
-import { loading, loaded } from './../../state/loader/loader.actions';
 import {
   HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { catchError, EMPTY, Observable, throwError, tap } from 'rxjs';
+import { catchError, EMPTY, Observable, tap } from 'rxjs';
 import { AppState } from 'src/app/state';
 import { emitError } from './../../state/error/error.actions';
+import { loaded, loading } from './../../state/loader/loader.actions';
 
 @Injectable()
 export class ErrorHandlerInterceptor implements HttpInterceptor {

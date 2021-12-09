@@ -20,7 +20,7 @@ const _errorReducer = createReducer(
       message: `${action.payload.code } - ${action.payload.message}`
     }
   }),
-  on(ErrorActions.releaseError, (state, action) => {
+  on(ErrorActions.releaseError, () => {
     return {
       hasError: false,
       message: ''

@@ -12,10 +12,10 @@ const initialState: LoaderState = {
 
 const _loaderReducer = createReducer(
   initialState,
-  on(LoaderActions.loading, (state, action) => {
+  on(LoaderActions.loading, () => {
     return { loading: true }
   }),
-  on(LoaderActions.loaded, (state, action) => {
+  on(LoaderActions.loaded, () => {
     return { loading: false }
   })
 );

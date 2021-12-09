@@ -22,7 +22,7 @@ export class OrdersComponent {
   ) {
     this.store.dispatch(loadOrders());
   }
-  get orders$(): Observable<Order[]> { return this.ordersService.getfilteredOrders(); };
+  get orders$(): Observable<Order[]> { return this.ordersService.getfilteredOrders(); }
   handleFilterEvent(filterObject: FilterObject): void {
     this.store.dispatch(OrderFilterActions.update({ payload: filterObject }));
   }

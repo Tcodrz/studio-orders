@@ -1,8 +1,8 @@
-import { User } from './../api-interface/user.interface';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map, catchError } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Order } from '../api-interface/order.interface';
+import { User } from './../api-interface/user.interface';
 
 export interface ApiResponse {
   data: any;

@@ -29,8 +29,8 @@ export class OrdersFilterService {
    * @returns an updated list of active filters
    */
    removeActiveFilter(item: FilterItem, filterObject: FilterObject): FilterObject {
-    const newFilterObject: any = {};
-    for (let [key, value] of Object.entries(filterObject)) {
+    const newFilterObject: any = { };
+    for (const [key, value] of Object.entries(filterObject)) {
       if (key === item.key) {
         if (key === 'fromDate')
           newFilterObject.fromDate = DateService.getDate('yyyymmdd', { monthStart: true });

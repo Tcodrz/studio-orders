@@ -7,7 +7,7 @@ export class DateService {
   static getDate(format: 'ddmmyyyy' | 'yyyymmdd', options: { monthStart?: boolean, monthEnd?: boolean }) {
     const date = new Date();
     let day = date.getDate();
-    let month = date.getMonth() + 1;
+    const month = date.getMonth() + 1;
     const year = date.getFullYear();
 
     if (options.monthStart) day = 1;

@@ -1,6 +1,6 @@
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { IconsService } from './../../material/icons.service';
-import { OrdersFilterService, FilterItem } from './../services/orders-filter.service';
-import { ChangeDetectionStrategy, Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import { FilterItem, OrdersFilterService } from './../services/orders-filter.service';
 
 export interface FilterObject {
   fromPrice: number | null;

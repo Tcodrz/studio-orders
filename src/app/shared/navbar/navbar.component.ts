@@ -19,7 +19,7 @@ interface SidenavItem {
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit, OnDestroy{
-  sidenavOpened: boolean = true;
+  sidenavOpened = true;
   sidenavMode: 'push' | 'over' = 'push';
   sidenavItems: SidenavItem[] = [
     {
