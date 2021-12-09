@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { map, Observable } from 'rxjs';
+import { map } from 'rxjs';
 import { AppState } from 'src/app/state';
+import * as utils from '../../core/utils';
 import { DateService } from './../../shared/services/date.service';
 import { Order } from './../../state/api-interface/order.interface';
 import { FilterObject } from './../filter/filter.component';
@@ -32,26 +33,27 @@ export class OrdersService {
     ).subscribe(filter => this._filter = filter);
 
   }
-  private filterOrders(orders: Order[]): Order[] {
+  filterOrders(orders: Order[]): Order[] {
     let filteredOrders: Order[] = [];
     const [fYear, fMonth, fDay] = this._filter.fromDate.split('-');
     const [tYear, tMonth, tDay] = this._filter.toDate.split('-');
     for (const order of orders) {
       const [oMonth, oDay, oYear] = order.date.split('/');
       const yearInRange = ((+oYear) >= (+fYear) && (+oYear) <= (+tYear));
-      if (!yearInRange) continue;
       const monthInRange = ((+oMonth) >= (+fMonth) && (+oMonth) <= (+tMonth));
-      if (!monthInRange) continue;
       const dayInRange = ((+oDay) >= (+fDay) && (+oDay) <= (+tDay));
-      if (dayInRange) filteredOrders.push(order);
+      if (!yearInRange) continue;
+      if (!monthInRange) continue;
+      if (!dayInRange) continue;
+      if (this._filter.customer && !utils.isSubStringInString(this._filter.customer.toLowerCase(), order.customer.name.toLowerCase())) continue;
+      if (this._filter.advertiser && !utils.isSubStringInString(this._filter.advertiser.toLowerCase(), order.advertiser.name.toLowerCase())) continue;
+      if (this._filter.narrator && !utils.isSubStringInStrings(this._filter.narrator.toLowerCase(), order.narrators.map(n => n.name.toLowerCase()))) continue;
+      if (this._filter.orderNumber && !utils.isSubStringInString(this._filter.orderNumber.toUpperCase(), order.id.toUpperCase())) continue;
+      if (order.price.fullPrice < (this._filter.fromPrice || 0) ||
+          order.price.fullPrice > (this._filter.toPrice || Infinity)) continue;
+      filteredOrders.push(order);
     }
     filteredOrders =  filteredOrders.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
     return filteredOrders;
-  }
-  getfilteredOrders(): Observable<Order[]> {
-    return this.store.pipe(
-      select('orders'),
-      map(state => this.filterOrders(state.orders))
-    );
   }
 }

@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Observable, of } from 'rxjs';
 import { Order } from 'src/app/state/api-interface/order.interface';
 import { IconsService } from './../../material/icons.service';
 
@@ -9,7 +8,7 @@ import { IconsService } from './../../material/icons.service';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent {
-  @Input() ordersList: Observable<Order[]> = of([]);
+  @Input() ordersList: Order[] = [];
   @Output() onPrint: EventEmitter<Order> = new EventEmitter();
   @Output() onEdit: EventEmitter<Order> = new EventEmitter();
   @Output() onDelete: EventEmitter<Order> = new EventEmitter();

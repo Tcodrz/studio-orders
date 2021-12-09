@@ -14,7 +14,7 @@
       <td>מוזיקה</td>
       <td>פעולות</td>
     </tr>
-    <tr *ngFor="let order of ordersList | async" class="table-row">
+    <tr *ngFor="let order of ordersList" class="table-row">
       <td> {{ order.id }} </td>
       <td> {{ order.date | date }} </td>
       <td> {{ order.advertiser.name }} </td>
