@@ -1,12 +1,12 @@
-import { MaterialModule } from './../material/material.module';
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MaterialModule } from './../material/material.module';
+import { ChipsComponent } from './filter/chips/chips.component';
+import { FilterComponent } from './filter/filter.component';
+import { ListComponent } from './list/list.component';
 import { OrdersRoutingModule } from './orders-routing.module';
 import { OrdersComponent } from './orders.component';
-import { FilterComponent } from './filter/filter.component';
-import { FormsModule } from '@angular/forms';
-import { ChipsComponent } from './filter/chips/chips.component';
-import { ListComponent } from './list/list.component';
 
 
 @NgModule({

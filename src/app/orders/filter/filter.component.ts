@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { IconsService } from './../../material/icons.service';
-import { FilterItem, OrdersFilterService } from './../services/orders-filter.service';
+import { FilterItem, OrdersFilterService, initialFilterObject } from './../services/orders-filter.service';
 
 export interface FilterObject {
   fromPrice: number | null;
@@ -26,7 +26,7 @@ export class FilterComponent {
   }
   @Output() onFilter: EventEmitter<FilterObject> = new EventEmitter<FilterObject>();
   @Output() onReset: EventEmitter<void> = new EventEmitter<void>();
-  filterObject: FilterObject = this.orderFilterService.initialFilterState;
+  filterObject: FilterObject = initialFilterObject;
   filtersList: FilterItem[] = [];
 
   constructor(

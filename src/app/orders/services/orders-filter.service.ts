@@ -1,8 +1,17 @@
+import { Injectable } from '@angular/core';
 import { DateService } from './../../shared/services/date.service';
 import { FilterObject } from './../filter/filter.component';
-import { Injectable } from '@angular/core';
 
-
+export const initialFilterObject: FilterObject = {
+  fromPrice: 0,
+  toPrice: Infinity,
+  advertiser: '',
+  customer: '',
+  narrator: '',
+  fromDate: DateService.getDate('yyyymmdd', { monthStart: true }),
+  toDate: DateService.getDate('yyyymmdd', { monthEnd: true }),
+  orderNumber: ''
+}
 
 export type FilterItem = {
  key: string;
@@ -11,18 +20,6 @@ export type FilterItem = {
 
 @Injectable()
 export class OrdersFilterService {
-  get initialFilterState(): FilterObject {
-    return {
-      fromPrice: null,
-      toPrice: null,
-      advertiser: '',
-      customer: '',
-      narrator: '',
-      fromDate: DateService.getDate('yyyymmdd', { monthStart: true }),
-      toDate: DateService.getDate('yyyymmdd', { monthEnd: true }),
-      orderNumber: ''
-    }
-  }
   /**
    * Removes active filter from filters object
    * @param item active filter to remove
