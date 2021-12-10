@@ -1,5 +1,6 @@
 import { FilterItem } from './../../services/orders-filter.service';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import * as utils from '../../../core/utils';
 
 @Component({
   selector: 'app-chips',
@@ -12,6 +13,8 @@ export class ChipsComponent {
   @Output() removeActiveFilter: EventEmitter<FilterItem> = new EventEmitter();
   filtersList: FilterItem[] = [];
   isDate(key: string): boolean { return key === 'fromDate' || key === 'toDate'; }
+  isNarrator(key: string): boolean { return key === 'narrator'; }
+  toHebrew(value: string): string { return utils.forceHebrew(value.toLowerCase()); }
   parseDate(value: string): string {
     const date = value.split('-');
     return `${date[2]}-${date[1]}-${date[0]}`;

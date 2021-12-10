@@ -31,7 +31,6 @@ export class OrdersService {
       select('filter'),
       map(state => state.filter)
     ).subscribe(filter => this._filter = filter);
-
   }
   filterOrders(orders: Order[]): Order[] {
     let filteredOrders: Order[] = [];
@@ -47,10 +46,14 @@ export class OrdersService {
       if (!dayInRange) continue;
       if (this._filter.customer && !utils.isSubStringInString(this._filter.customer.toLowerCase(), order.customer.name.toLowerCase())) continue;
       if (this._filter.advertiser && !utils.isSubStringInString(this._filter.advertiser.toLowerCase(), order.advertiser.name.toLowerCase())) continue;
-      if (this._filter.narrator && !utils.isSubStringInStrings(this._filter.narrator.toLowerCase(), order.narrators.map(n => n.name.toLowerCase()))) continue;
       if (this._filter.orderNumber && !utils.isSubStringInString(this._filter.orderNumber.toUpperCase(), order.id.toUpperCase())) continue;
-      if (order.price.fullPrice < (this._filter.fromPrice || 0) ||
-          order.price.fullPrice > (this._filter.toPrice || Infinity)) continue;
+      if (order.price.fullPrice < (this._filter.fromPrice || 0) || order.price.fullPrice > (this._filter.toPrice || Infinity)) continue;
+      if (this._filter.narrator) {
+        const narrNames = order.narrators.map(n => n.name);
+        const narrator = utils.forceHebrew(this._filter.narrator.toLowerCase());
+        const isNarrator = utils.isSubStringInStrings(narrator, narrNames);
+        if (!isNarrator) continue;
+      }
       filteredOrders.push(order);
     }
     filteredOrders =  filteredOrders.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
