@@ -8,12 +8,14 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChipsComponent {
-  @Input() set list(val: FilterItem[]) {
-    if (val) this.filtersList = [ ...val ];
-  }
+  @Input() set list(val: FilterItem[]) { if (val) this.filtersList = [ ...val ]; }
   @Output() removeActiveFilter: EventEmitter<FilterItem> = new EventEmitter();
   filtersList: FilterItem[] = [];
-
+  isDate(key: string): boolean { return key === 'fromDate' || key === 'toDate'; }
+  parseDate(value: string): string {
+    const date = value.split('-');
+    return `${date[2]}-${date[1]}-${date[0]}`;
+  }
   translateKey(key: string): string {
     switch (key) {
       case 'orderNumber':
