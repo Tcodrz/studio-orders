@@ -34,29 +34,42 @@ export class OrdersService {
   }
   filterOrders(orders: Order[]): Order[] {
     let filteredOrders: Order[] = [];
-    const [fYear, fMonth, fDay] = this._filter.fromDate.split('-');
-    const [tYear, tMonth, tDay] = this._filter.toDate.split('-');
+    const [sFromYear, sFromMonth, sFromDay] = this._filter.fromDate.split('-');
+    const [sToYear, sToMonth, sToDay] = this._filter.toDate.split('-');
     for (const order of orders) {
-      const [oMonth, oDay, oYear] = order.date.split('/');
-      const yearInRange = ((+oYear) >= (+fYear) && (+oYear) <= (+tYear));
-      const monthInRange = ((+oMonth) >= (+fMonth) && (+oMonth) <= (+tMonth));
-      const dayInRange = ((+oDay) >= (+fDay) && (+oDay) <= (+tDay));
-      if (!yearInRange) continue;
-      if (!monthInRange) continue;
-      if (!dayInRange) continue;
-      if (this._filter.customer && !utils.isSubStringInString(this._filter.customer.toLowerCase(), order.customer.name.toLowerCase())) continue;
-      if (this._filter.advertiser && !utils.isSubStringInString(this._filter.advertiser.toLowerCase(), order.advertiser.name.toLowerCase())) continue;
+      const [sOrderMonth, sOrderDay, sOrderYear] = order.date.split('/');
+      const bYearInRange = ((+sOrderYear) >= (+sFromYear) && (+sOrderYear) <= (+sToYear));
+      if (!bYearInRange) continue;
+      const bMonthInRange = ((+sOrderMonth) >= (+sFromMonth) && (+sOrderMonth) <= (+sToMonth));
+      if (!bMonthInRange) continue;
+      const bDayInRange = ((+sOrderDay) >= (+sFromDay) && (+sOrderDay) <= (+sToDay));
+      if (!bDayInRange) continue;
       if (this._filter.orderNumber && !utils.isSubStringInString(this._filter.orderNumber.toUpperCase(), order.id.toUpperCase())) continue;
       if (order.price.fullPrice < (this._filter.fromPrice || 0) || order.price.fullPrice > (this._filter.toPrice || Infinity)) continue;
+      if (this._filter.customer) {
+        const sOrderCustomer = order.customer.name.toLowerCase();
+        const sEnglishCustomer = this._filter.customer.toLowerCase();
+        const sHebrewCustomer = utils.forceHebrew(sEnglishCustomer);
+        const bIsCustomer = utils.isSubStringInString(sEnglishCustomer, sOrderCustomer) || utils.isSubStringInString(sHebrewCustomer, sOrderCustomer);
+        if (!bIsCustomer) continue;
+      }
+      if (this._filter.advertiser) {
+        const sOrderAdvertiser = order.advertiser.name.toLowerCase();
+        const sEnglishAdvertiser = this._filter.advertiser.toLowerCase();
+        const sHebrewAdvertiser = utils.forceHebrew(sEnglishAdvertiser);
+        const bIsAdvertiser = utils.isSubStringInString(sEnglishAdvertiser, sOrderAdvertiser) || utils.isSubStringInString(sHebrewAdvertiser, sOrderAdvertiser);
+        if (!bIsAdvertiser) continue;
+      }
       if (this._filter.narrator) {
-        const narrNames = order.narrators.map(n => n.name);
-        const narrator = utils.forceHebrew(this._filter.narrator.toLowerCase());
-        const isNarrator = utils.isSubStringInStrings(narrator, narrNames);
-        if (!isNarrator) continue;
+        const aNarrNames = order.narrators.map(n => n.name);
+        const sHebrewNarrator = utils.forceHebrew(this._filter.narrator.toLowerCase());
+        const sEnglishNarrator = this._filter.narrator.toLowerCase();
+        const bIsNarrator = utils.isSubStringInStrings(sHebrewNarrator, aNarrNames) || utils.isSubStringInStrings(sEnglishNarrator, aNarrNames);
+        if (!bIsNarrator) continue;
       }
       filteredOrders.push(order);
     }
-    filteredOrders =  filteredOrders.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    filteredOrders = filteredOrders.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
     return filteredOrders;
   }
 }
