@@ -1,23 +1,16 @@
-
 <div class="login-component-container">
-
   <form class="login-form" [formGroup]="loginForm">
-
     <h1>כניסה</h1>
-
-    <mat-form-field appearance="legacy">
-      <mat-label>שם משתמש</mat-label>
-      <input type="text" matInput formControlName="username">
-    </mat-form-field>
-
-    <mat-form-field appearance="legacy">
-      <mat-label>סיסמא</mat-label>
-      <input type="password" matInput  formControlName="password">
-    </mat-form-field>
-
-    <button type="submit" mat-raised-button color="primary" [disabled]="disableButton">היכנס</button>
-
+    <span class="p-float-label">
+      <input pInputText type="text" formControlName="username">
+      <label for="float-input">שם משתמש</label>
+    </span>
+    <span class="p-float-label">
+      <input pInputText type="password" formControlName="password">
+      <label for="float-input">סיסמא</label>
+    </span>
+    <button pButton type="submit" class="p-button-raised" [disabled]="disableButton">היכנס</button>
   </form>
 </div>
 
-
+<app-error-handler></app-error-handler>

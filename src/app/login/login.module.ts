@@ -1,7 +1,9 @@
-import { ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from './../material/material.module';
-import { NgModule } from '@angular/core';
+import { ErrorHandlerModule } from './../error-handler/error-handler.module';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
 
@@ -13,7 +15,9 @@ import { LoginComponent } from './login.component';
     CommonModule,
     LoginRoutingModule,
     ReactiveFormsModule,
-    MaterialModule
+    InputTextModule,
+    ButtonModule,
+    ErrorHandlerModule
   ]
 })
 export class LoginModule { }

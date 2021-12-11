@@ -8,6 +8,10 @@ body {
   direction: rtl;
 }
 
+.p-float-label label {
+  right: 12px;
+}
+
 .mat-form-field {
   text-align: right!important;
 }

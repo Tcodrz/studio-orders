@@ -13,10 +13,17 @@
     border-radius: 3px;
     box-shadow: 0 0 10px #a9a9a9;
     padding: 2rem 1rem;
-    width: 50vw;
 
     h1 {
       text-align: center;
+    }
+
+    .p-float-label {
+      margin: 1rem 1rem;
+    }
+
+    .p-button-raised {
+      margin: .5rem 1rem;
     }
 
     .error-message {

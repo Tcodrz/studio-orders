@@ -1,7 +1,8 @@
-import { MaterialModule } from './../material/material.module';
-import { NgModule } from '@angular/core';
+import { ToastModule } from 'primeng/toast';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { ErrorHandlerComponent } from './error-handler.component';
+
 
 
 
@@ -11,7 +12,7 @@ import { ErrorHandlerComponent } from './error-handler.component';
   ],
   imports: [
     CommonModule,
-    MaterialModule
+    ToastModule
   ],
   exports: [
     ErrorHandlerComponent
