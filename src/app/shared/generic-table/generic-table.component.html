@@ -1,0 +1,37 @@
+<div class="card">
+  <p-table [value]="value" [columns]="cols" [resizableColumns]="true" columnResizeMode="expand"
+    responsiveLayout="scroll" styleClass="p-datatable-gridlines">
+    <ng-template pTemplate="header">
+      <tr>
+        <th *ngFor="let column of cols" [pSortableColumn]="column.field">
+          {{ column.header }}
+        </th>
+        <th *ngIf="bWithActions">פעולות</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr style="text-align: center;">
+        <td *ngFor="let col of columns">
+          {{ rowData[col.field] }}
+        </td>
+        <td *ngIf="bWithActions">
+          <ng-container [ngTemplateOutlet]="orderActions"></ng-container>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<ng-template #orderActions>
+  <div class="order-actions-group">
+    <button class="order-action-btn" mat-raised-button mat-icon-button color="primary">
+      <mat-icon>print</mat-icon>
+    </button>
+    <button class="order-action-btn" mat-raised-button mat-icon-button color="accent">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button class="order-action-btn" mat-raised-button mat-icon-button color="warn">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</ng-template>

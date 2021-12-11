@@ -1,3 +1,5 @@
+import { OrderStatusPipe } from './../core/pipes/order-status.pipe';
+import { SharedModule } from './../shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -14,13 +16,15 @@ import { OrdersComponent } from './orders.component';
     OrdersComponent,
     FilterComponent,
     ChipsComponent,
-    ListComponent
+    ListComponent,
+    OrderStatusPipe
   ],
   imports: [
     CommonModule,
     OrdersRoutingModule,
     FormsModule,
-    MaterialModule
+    MaterialModule,
+    SharedModule
   ]
 })
 export class OrdersModule { }
