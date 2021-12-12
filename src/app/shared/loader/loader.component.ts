@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-loader',
   template: `
   <div class="spinner">
-    <mat-spinner *ngIf="loading$ | async"></mat-spinner>
+    <p-progressSpinner *ngIf="loading$ | async"></p-progressSpinner>
   </div>
   `,
   styles: [`
@@ -19,15 +19,11 @@ import { Component, OnInit } from '@angular/core';
   `]
 })
 export class LoaderComponent implements OnInit {
-
   loading$: Observable<boolean> = of(false);
-
   constructor(private store: Store<AppState>) { }
-
   ngOnInit(): void {
     this.loading$ = this.store.select('loader').pipe(
       map(loadState => loadState.loading)
     );
   }
-
 }
