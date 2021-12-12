@@ -1,11 +1,38 @@
+::ng-deep a.p-ripple.p-element {
+  display: flex;
+  flex-direction: row-reverse;
+  text-decoration: none;
+}
+
 .filter-component {
 
   .filter-component-inputs {
     margin-top: 1rem;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
     flex-wrap: wrap;
+
+    .filter-input-group {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    .filter-input-date-group {
+      display: flex;
+      flex-direction: row;
+      margin-top: 2rem;
+    }
+  }
+
+  .action-btn-container {
+    display: flex;
+    flex-direction: row-reverse;
+
+
+    .action-btn-reset {
+      margin-left: 1rem;
+    }
   }
 
   .filter-component-actions {
@@ -14,15 +41,6 @@
     flex-direction: row;
     justify-content: space-between;
 
-    .action-btn-container {
-      display: flex;
-      flex-direction: row-reverse;
-
-
-      .action-btn-reset {
-        margin-left: 1rem;
-      }
-    }
   }
 
 }
@@ -37,8 +55,8 @@ mat-form-field {
 
 @media(max-width: 800px) {
 
-      .filter-component-chips-list {
-        visibility: hidden;
-      }
+  .filter-component-chips-list {
+    visibility: hidden;
+  }
 
 }

@@ -24,14 +24,11 @@
 
 <ng-template #orderActions>
   <div class="order-actions-group">
-    <button class="order-action-btn" mat-raised-button mat-icon-button color="primary">
-      <mat-icon>print</mat-icon>
-    </button>
-    <button class="order-action-btn" mat-raised-button mat-icon-button color="accent">
-      <mat-icon>edit</mat-icon>
-    </button>
-    <button class="order-action-btn" mat-raised-button mat-icon-button color="warn">
-      <mat-icon>delete</mat-icon>
-    </button>
+    <button pButton type="button" class="p-button-sm p-button-outlined p-button-rounded p-button-secondary"
+      icon="pi pi-print"></button>
+    <button pButton type="button" class="p-button-sm p-button-outlined p-button-rounded p-button-warning mr-2"
+      icon="pi pi-pencil"></button>
+    <button pButton type="button" class="p-button-sm p-button-outlined p-button-rounded p-button-danger mr-2"
+      icon="pi pi-trash"></button>
   </div>
 </ng-template>

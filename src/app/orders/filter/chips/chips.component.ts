@@ -9,7 +9,7 @@ import * as utils from '../../../core/utils';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChipsComponent {
-  @Input() set list(val: FilterItem[]) { if (val.length) this.filtersList = [ ...val ]; }
+  @Input() set list(val: FilterItem[]) { this.filtersList = [ ...val ]; }
   @Output() removeActiveFilter: EventEmitter<FilterItem> = new EventEmitter();
   filtersList: FilterItem[] = [];
   isDate(key: string): boolean { return key === 'fromDate' || key === 'toDate'; }

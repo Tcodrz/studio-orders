@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { IconsService } from './../../material/icons.service';
-import { FilterItem, OrdersFilterService, initialFilterObject } from './../services/orders-filter.service';
+import { FilterItem, initialFilterObject, OrdersFilterService } from './../services/orders-filter.service';
 
 export interface FilterObject {
   fromPrice: number | null;
@@ -22,13 +22,19 @@ export interface FilterObject {
 })
 export class FilterComponent {
   @Input() set filterState(val: FilterObject | null) {
-    if (val) this.filterObject = { ...val }
+    if (val) {
+      this.filterObject = { ...val };
+      this.fromDate = new Date(val.fromDate);
+      this.toDate = new Date(val.toDate);
+    }
   }
   @Output() onFilter: EventEmitter<FilterObject> = new EventEmitter<FilterObject>();
   @Output() onReset: EventEmitter<void> = new EventEmitter<void>();
   filterObject: FilterObject = initialFilterObject;
   filtersList: FilterItem[] = [];
 
+  fromDate = new Date();
+  toDate = new Date();
   constructor(
     private orderFilterService: OrdersFilterService,
     public icons: IconsService
@@ -45,5 +51,13 @@ export class FilterComponent {
     const newFilterObject = this.orderFilterService.removeActiveFilter(item, filterObject);
     this.onFilter.emit(newFilterObject);
     this.filtersList = this.orderFilterService.createListFromFilterObject(newFilterObject);
+  }
+  onToDate(event: Date): void {
+    const date = new Date(event);
+    this.filterObject.toDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+  }
+  onFromDate(event: any): void {
+    const date = new Date(event);
+    this.filterObject.fromDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
   }
 }

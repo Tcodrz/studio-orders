@@ -1,78 +1,68 @@
 <div class="filter-component">
-  <mat-accordion>
-    <mat-expansion-panel showToggle [expanded]="true">
-
-      <mat-expansion-panel-header>
-        <mat-panel-title>חיפוש</mat-panel-title>
-      </mat-expansion-panel-header>
-
-      <form (ngSubmit)="onSubmit()">
-        <div class="filter-component-inputs">
-          <ng-template [ngTemplateOutlet]="filterInputs"></ng-template>
+  <p-fieldset class="p-fieldset-legend" legend="חיפוש" [toggleable]="true" [collapsed]="true">
+    <form (ngSubmit)="onSubmit()">
+      <div class="filter-component-inputs">
+        <ng-template [ngTemplateOutlet]="filterInputs"></ng-template>
+      </div>
+      <div class="filter-component-actions">
+        <div class="filter-component-chips-list">
+          <app-chips [list]="filtersList" (removeActiveFilter)="removeActiveFilter($event, filterObject)"></app-chips>
         </div>
-        <div class="filter-component-actions">
-          <div class="filter-component-chips-list">
-            <app-chips [list]="filtersList" (removeActiveFilter)="removeActiveFilter($event, filterObject)"></app-chips>
-          </div>
-
-          <div class="action-btn-container">
-            <button type="submit" mat-raised-button mat-icon-button color="accent">
-              <fa-icon [icon]="icons.faSearch"></fa-icon>
-            </button>
-            <button type="button" class="action-btn-reset" color="warn" mat-raised-button mat-icon-button
-              (click)="resetFiltersState()">
-              <fa-icon [icon]="icons.faTrashRestore"></fa-icon>
-            </button>
-          </div>
-        </div>
-      </form>
-    </mat-expansion-panel>
-  </mat-accordion>
+      </div>
+    </form>
+  </p-fieldset>
 </div>
 
 
 
-
 <ng-template #filterInputs>
+  <div class="filter-input-group">
+    <span class="p-float-label">
+      <input type="text" pInputText class="p-inputtext-sm" [(ngModel)]="filterObject.orderNumber">
+      <label>מספר הזמנה</label>
+    </span>
 
-  <mat-form-field appearance="fill">
-    <mat-label>מספר הזמנה</mat-label>
-    <input matInput type="text" [(ngModel)]="filterObject.orderNumber">
-  </mat-form-field>
+    <span class="p-float-label">
+      <input pInputText type="text" class="p-inputtext-sm" [(ngModel)]="filterObject.advertiser">
+      <label>פרסומאי</label>
+    </span>
 
-  <mat-form-field appearance="fill">
-    <mat-label>פרסומאי</mat-label>
-    <input matInput type="text" [(ngModel)]="filterObject.advertiser">
-  </mat-form-field>
+    <span class="p-float-label">
+      <input pInputText type="text" class="p-inputtext-sm" [(ngModel)]="filterObject.customer">
+      <label>לקוח</label>
+    </span>
 
-  <mat-form-field appearance="fill">
-    <mat-label>לקוח</mat-label>
-    <input matInput type="text" [(ngModel)]="filterObject.customer">
-  </mat-form-field>
+    <span class="p-float-label">
+      <input pInputText type="text" class="p-inputtext-sm" [(ngModel)]="filterObject.narrator">
+      <label>קריין</label>
+    </span>
 
-  <mat-form-field appearance="fill">
-    <mat-label>קריין</mat-label>
-    <input matInput type="text" [(ngModel)]="filterObject.narrator">
-  </mat-form-field>
+    <span class="p-float-label">
+      <input type="number" pInputText class="p-inputtext-sm" [(ngModel)]="filterObject.fromPrice">
+      <label>ממחיר</label>
+    </span>
 
-  <mat-form-field appearance="fill">
-    <mat-label>ממחיר</mat-label>
-    <input matInput type="number" [(ngModel)]="filterObject.fromPrice">
-  </mat-form-field>
+    <span class="p-float-label">
+      <input type="number" pInputText class="p-inputtext-sm" [(ngModel)]="filterObject.toPrice">
+      <label>עד מחיר</label>
+    </span>
 
-  <mat-form-field appearance="fill">
-    <mat-label>עד מחיר</mat-label>
-    <input matInput type="number" [(ngModel)]="filterObject.toPrice">
-  </mat-form-field>
-
-  <mat-form-field appearance="fill">
-    <mat-label>מתאריך</mat-label>
-    <input matInput type="date" [(ngModel)]="filterObject.fromDate">
-  </mat-form-field>
-
-  <mat-form-field appearance="fill">
-    <mat-label>עד תאריך</mat-label>
-    <input matInput type="date" [(ngModel)]="filterObject.toDate">
-  </mat-form-field>
+  </div>
+  <div class="filter-input-date-group">
+    <span class="p-float-label">
+      <p-calendar [(ngModel)]="fromDate" [dateFormat]="'dd-mm-yy'" (onSelect)="onFromDate($event)"></p-calendar>
+      <label>מתאריך</label>
+    </span>
+    <span class="p-float-label mr-3">
+      <p-calendar [(ngModel)]="toDate" [dateFormat]="'dd-mm-yy'" (onSelect)="onToDate($event)"></p-calendar>
+      <label>עד תאריך</label>
+    </span>
+  </div>
+  <div class="action-btn-container">
+    <button pButton type="submit`" icon="pi pi-search"
+      class="p-button-raised p-button-rounded p-button-warning mr-3"></button>
+    <button pButton type="button`" icon="pi pi-trash" class="p-button-raised p-button-rounded p-button-danger mr-2"
+      (click)="resetFiltersState()"></button>
+  </div>
 
 </ng-template>

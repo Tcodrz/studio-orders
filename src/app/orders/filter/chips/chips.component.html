@@ -1,13 +1,7 @@
-<mat-chip-list>
-  <mat-chip class="filter-chip" *ngFor="let item of filtersList" [removable]="true"
-    (removed)="removeActiveFilter.emit(item)">
-    <ng-container [ngTemplateOutlet]="isDate(item.key) ? dateChip : isNarrator(item.key) ? narrChip : genericChip"
-      [ngTemplateOutletContext]="{item: item}"></ng-container>
-    <button matChipRemove class="filter-chip-remove-btn">
-      <mat-icon>cancel</mat-icon>
-    </button>
-  </mat-chip>
-</mat-chip-list>
+<p-chip *ngFor="let item of filtersList" [removable]="true" (onRemove)="removeActiveFilter.emit(item)">
+  <ng-container [ngTemplateOutlet]="isDate(item.key) ? dateChip : isNarrator(item.key) ? narrChip : genericChip"
+    [ngTemplateOutletContext]="{item: item}"></ng-container>
+</p-chip>
 
 <ng-template #genericChip let-item="item">
   {{ translateKey(item.key) }} : {{ item.value }}
