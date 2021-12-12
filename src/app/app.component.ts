@@ -11,7 +11,6 @@ import { UserState } from './state/user/user.reducer';
 })
 export class AppComponent implements OnInit {
   loggedInUser$: Observable<boolean> = of(false);
-
   constructor(
     private store: Store<AppState>
   ) { }

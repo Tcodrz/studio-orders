@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MaterialModule } from './../material/material.module';
+import { TableModule } from 'primeng/table';
+import { PrimeModule } from './../prime/prime.module';
+import { GenericTableComponent } from './generic-table/generic-table.component';
+import { LoaderComponent } from './loader/loader.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
-import { LoaderComponent } from './loader/loader.component';
-import { GenericTableComponent } from './generic-table/generic-table.component';
-import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [
@@ -16,8 +16,8 @@ import { TableModule } from 'primeng/table';
   ],
   imports: [
     CommonModule,
-    MaterialModule,
     TableModule,
+    PrimeModule
   ],
   exports: [
     NavbarComponent,
