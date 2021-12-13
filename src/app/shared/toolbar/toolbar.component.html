@@ -1,17 +1,5 @@
-<mat-toolbar class="toolbar" color="primary">
-  <button mat-icon-button
-          (click)="sidenavToggle.emit();
-          animateButton(sideNavMenu)"
-          #sideNavMenu
-          id="sideNavBtn">
-    <fa-icon [icon]="sidenavToggleIcon" class="logo-icon"></fa-icon>
-  </button>
-
-  <div class="toolbar-center-content">
-    <h1> {{ user.name | titlecase }} </h1>
+<p-menubar [model]="items">
+  <div class="logout-btn-container">
+    <button pButton icon="pi pi-sign-out" class="p-button-raised p-button-rounded" (click)="logout()"></button>
   </div>
-
-  <button mat-icon-button (click)="logout.emit()" class="icon-container">
-    <fa-icon [icon]="logoutIcon" class="logo-icon"></fa-icon>
-  </button>
-</mat-toolbar>
+</p-menubar>

@@ -4,12 +4,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import url('./assets/table.scss');
 
-html, body { height: 100%; }
+html,
+body {
+  height: 100%;
+}
+
 body {
   font-family: 'Noto Sans Hebrew', sans-serif !important;
   margin: 0;
   direction: rtl;
   text-align: right !important;
+}
+
+* {
+  font-family: 'Noto Sans Hebrew', sans-serif; // https://fonts.google.com/noto/specimen/Noto+Sans+Hebrew
+  font-size: 14px;
 }
 
 legend {
@@ -24,6 +33,41 @@ legend {
   flex-direction: row-reverse;
 }
 
-.container-xl, .container-lg, .container-md, .container-sm, .container {
-  max-width: min-content;
+.container {
+  margin: 5rem 10rem;
+}
+
+
+@media(max-width: 1440px) {
+  .container {
+    margin: 4rem 6rem;
+  }
+  .p-float-label {
+    margin-top: 25px;
+  }
+}
+
+@media(max-width: 1024px) {
+  .container {
+    margin: 3rem 5rem;
+  }
+}
+
+@media(max-width: 768px) {
+  .container {
+    margin: 2rem 4rem;
+  }
+
+}
+
+@media(max-width: 425px) {
+  .container {
+    margin: 1rem 2rem;
+  }
+}
+
+@media(max-width: 320px) {
+  .container {
+    margin: 0.5rem 1rem;
+  }
 }

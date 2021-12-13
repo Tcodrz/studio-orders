@@ -1,3 +1,5 @@
-<app-orders-filter [filterState]="filterObject$ | async" (onFilter)="handleFilterEvent($event)"
-  (onReset)="handleFilterResetEvent()"></app-orders-filter>
-<app-orders-list [ordersList]="orders"></app-orders-list>
+<div class="container">
+  <app-orders-filter [filterState]="filterObject$ | async" (onFilter)="handleFilterEvent($event)"
+    (onReset)="handleFilterResetEvent()"></app-orders-filter>
+  <app-orders-list [ordersList]="orders"></app-orders-list>
+</div>

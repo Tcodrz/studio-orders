@@ -21,6 +21,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
   ],
   exports: [
     NavbarComponent,
+    ToolbarComponent,
     LoaderComponent,
     GenericTableComponent
   ],

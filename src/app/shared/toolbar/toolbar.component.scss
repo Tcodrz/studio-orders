@@ -1,36 +1,23 @@
-.toolbar {
-
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-
-  .logo-icon {
-    font-size: 2rem;
+::ng-deep {
+  .p-menubar-end {
+    margin-right: auto;
+    margin-left: 2rem !important;
   }
 
-  .animate {
-    animation: rotate .5s linear;
+  p-menubarsub.p-element ul.p-submenu-list li.p-element.p-menuitem a.p-ripple.p-element.p-menuitem-link {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    padding-right: 3rem;
   }
-
-  .toolbar-center-content {
-    display: flex;
-    flex-direction: row;
-    width: 90%;
-  }
-
-
-  @keyframes rotate {
-    0% {
-      transform: rotate(0deg);
-    }
-
-    85% {
-      transform: rotate(400deg);
-    }
-
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-
 }
+  .logout-btn-container {
+    margin-left: auto;
+    .logout-btn {
+      cursor: pointer;
+      color: #047f94;
+    }
+    .logout-btn:hover {
+      cursor: pointer;
+      color: #35c4dc;
+    }
+  }

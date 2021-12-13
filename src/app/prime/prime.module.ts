@@ -6,6 +6,9 @@ import { ButtonModule } from 'primeng/button';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { CalendarModule } from 'primeng/calendar';
 import { FieldsetModule } from 'primeng/fieldset';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { MenubarModule } from 'primeng/menubar';
+
 
 
 @NgModule({
@@ -17,7 +20,9 @@ import { FieldsetModule } from 'primeng/fieldset';
     ButtonModule,
     InputNumberModule,
     CalendarModule,
-    FieldsetModule
+    FieldsetModule,
+    ProgressSpinnerModule,
+    MenubarModule,
   ],
   exports: [
     ChipModule,
@@ -26,7 +31,9 @@ import { FieldsetModule } from 'primeng/fieldset';
     ButtonModule,
     InputNumberModule,
     CalendarModule,
-    FieldsetModule
+    FieldsetModule,
+    ProgressSpinnerModule,
+    MenubarModule
   ]
 })
 export class PrimeModule { }
