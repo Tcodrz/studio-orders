@@ -1,9 +1,8 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, EventEmitter, Input, Output, TemplateRef, ViewChild } from '@angular/core';
-import { TableColumn } from 'src/app/shared/generic-table/generic-table.component';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, TemplateRef, ViewChild } from '@angular/core';
+import { TableColumn } from 'src/app/shared/components/generic-table/generic-table.component';
 import { Order } from 'src/app/state/api-interface/order.interface';
 import { OrderStatusPipe } from './../../core/pipes/order-status.pipe';
-import { IconsService } from './../../material/icons.service';
 
 
 export interface OrderDTO {
@@ -39,7 +38,6 @@ export class ListComponent {
     { field: 'narratorsPrice', header: 'עלות קריינים' },
   ];
   constructor(
-    public icons: IconsService,
     private orderStatusPipe: OrderStatusPipe,
     private currency: CurrencyPipe
   ) { }

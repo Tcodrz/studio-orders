@@ -1,4 +1,3 @@
-import { initialFilterObject } from './services/orders-filter.service';
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { map, Observable, of } from 'rxjs';
@@ -7,6 +6,7 @@ import { Order } from './../state/api-interface/order.interface';
 import * as OrderFilterActions from './../state/orders-filter/orders-filter.actions';
 import { loadOrders } from './../state/orders/orders.actions';
 import { FilterObject } from './filter/filter.component';
+import { initialFilterObject } from './services/orders-filter.service';
 import { OrdersService } from './services/orders.service';
 
 @Component({

@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { IconsService } from './../../material/icons.service';
 import { FilterItem, initialFilterObject, OrdersFilterService } from './../services/orders-filter.service';
 
 export interface FilterObject {
@@ -37,7 +36,6 @@ export class FilterComponent {
   toDate = new Date();
   constructor(
     private orderFilterService: OrdersFilterService,
-    public icons: IconsService
   ) { }
   onSubmit(): void {
     this.filtersList = this.orderFilterService.createListFromFilterObject(this.filterObject);
