@@ -3,7 +3,7 @@ import { DateService } from './../../shared/services/date.service';
 import { FilterObject } from './../filter/filter.component';
 
 export const initialFilterObject: FilterObject = {
-  fromPrice: 0,
+  fromPrice: null,
   toPrice: Infinity,
   advertiser: '',
   customer: '',
@@ -20,11 +20,6 @@ export type FilterItem = {
 
 @Injectable()
 export class OrdersFilterService {
-  /**
-   * Removes active filter from filters object
-   * @param item active filter to remove
-   * @returns an updated list of active filters
-   */
    removeActiveFilter(item: FilterItem, filterObject: FilterObject): FilterObject {
     const newFilterObject: any = { };
     for (const [key, value] of Object.entries(filterObject)) {
@@ -43,35 +38,19 @@ export class OrdersFilterService {
     }
     return newFilterObject;
    }
-  /**
-   * Takes a filter object and maps it to array of active filters
-   * @param filterObject Filters object to construct a list from
-   * @returns a list of active filters
-   */
    createListFromFilterObject(filterObject: FilterObject): FilterItem[] {
     const monthStart = DateService.getDate('yyyymmdd', { monthStart: true });
     const monthEnd = DateService.getDate('yyyymmdd', { monthEnd: true });
     const filters = Object.entries(filterObject);
     let filtersList: FilterItem[] = [];
     for (const [key, value] of filters) {
-      if (key === 'fromDate') {
-        if (value === monthStart) continue;
-      } else if (key === 'toDate') {
-        if (value === monthEnd) continue;
-      }
+      if (key === 'fromDate' && value === monthStart) continue;
+      else if (key === 'toDate' && value === monthEnd) continue;
+      else if (key === 'toPrice' && value === Infinity) continue;
       filtersList = this.toggleActiveFilter(key, value, filtersList);
     }
     return filtersList;
   }
-  /**
-   * Takes a list of active filters
-   * Adds or removes the value from the list
-   * and returns the same list
-   * @param key key to toggle
-   * @param value value to toggle
-   * @param list list of active filters
-   * @returns the list given as input after change
-   */
    toggleActiveFilter(key: string, value: string | number, list: FilterItem[]): FilterItem[] {
     let newList = [ ...list ];
     if (typeof value === 'string') {

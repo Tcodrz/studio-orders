@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { FilterItem, initialFilterObject, OrdersFilterService } from './../services/orders-filter.service';
+import { FormControl, FormGroup } from '@angular/forms';
+import { DateService } from './../../shared/services/date.service';
+import { FilterItem, OrdersFilterService } from './../services/orders-filter.service';
 
 export interface FilterObject {
   fromPrice: number | null;
@@ -22,40 +24,46 @@ export interface FilterObject {
 export class FilterComponent {
   @Input() set filterState(val: FilterObject | null) {
     if (val) {
-      this.filterObject = { ...val };
-      this.fromDate = new Date(val.fromDate);
-      this.toDate = new Date(val.toDate);
+      this.filterForm.patchValue(val);
+      this.filterForm.controls['fromDate'].setValue(val.fromDate);
+      this.filterForm.controls['toDate'].setValue(val.toDate);
     }
   }
   @Output() onFilter: EventEmitter<FilterObject> = new EventEmitter<FilterObject>();
   @Output() onReset: EventEmitter<void> = new EventEmitter<void>();
-  filterObject: FilterObject = initialFilterObject;
-  filtersList: FilterItem[] = [];
-
   fromDate = new Date();
   toDate = new Date();
+  filtersList: FilterItem[] = [];
+  filterForm: FormGroup = new FormGroup({
+    orderNumber: new FormControl(''),
+    customer: new FormControl(''),
+    advertiser: new FormControl(''),
+    narrator: new FormControl(''),
+    fromPrice: new FormControl(null),
+    toPrice: new FormControl(Infinity),
+    fromDate: new FormControl(DateService.getDate('ddmmyyyy', {monthStart: true})),
+    toDate: new FormControl(DateService.getDate('ddmmyyyy', {monthEnd: true}))
+  });
   constructor(
     private orderFilterService: OrdersFilterService,
   ) { }
   onSubmit(): void {
-    this.filtersList = this.orderFilterService.createListFromFilterObject(this.filterObject);
-    this.onFilter.emit(this.filterObject);
+    this.filtersList = this.orderFilterService.createListFromFilterObject(this.filterForm.value);
+    this.onFilter.emit(this.filterForm.value);
   }
-  resetFiltersState(): void {
-    this.onReset.emit();
-    this.filtersList = [];
-  }
-  removeActiveFilter(item: FilterItem, filterObject: FilterObject): void {
-    const newFilterObject = this.orderFilterService.removeActiveFilter(item, filterObject);
+  removeActiveFilter(item: FilterItem): void {
+    const newFilterObject = this.orderFilterService.removeActiveFilter(item, this.filterForm.value);
     this.onFilter.emit(newFilterObject);
     this.filtersList = this.orderFilterService.createListFromFilterObject(newFilterObject);
+    this.filterForm.patchValue(newFilterObject);
   }
-  onToDate(event: Date): void {
-    const date = new Date(event);
-    this.filterObject.toDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-  }
-  onFromDate(event: any): void {
-    const date = new Date(event);
-    this.filterObject.fromDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+  resetFiltersState() {
+    const sMonthStart = DateService.getDate('yyyymmdd', {monthStart: true});
+    const sMonthEnd = DateService.getDate('yyyymmdd', {monthEnd: true});
+    this.onReset.emit();
+    this.filtersList = [];
+    this.filterForm.reset();
+    this.filterForm.controls['fromDate'].setValue(sMonthStart);
+    this.filterForm.controls['toDate'].setValue(sMonthEnd);
   }
 }

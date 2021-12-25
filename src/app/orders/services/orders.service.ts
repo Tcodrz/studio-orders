@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { map } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { AppState } from 'src/app/state';
 import * as utils from '../../core/utils';
 import { DateService } from './../../shared/services/date.service';
@@ -34,8 +34,8 @@ export class OrdersService {
   }
   filterOrders(orders: Order[]): Order[] {
     let filteredOrders: Order[] = [];
-    const [sFromYear, sFromMonth, sFromDay] = this._filter.fromDate.split('-');
-    const [sToYear, sToMonth, sToDay] = this._filter.toDate.split('-');
+    const [sFromYear, sFromMonth, sFromDay] = this._filter.fromDate ? this._filter.fromDate.split('-') : DateService.getDate('ddmmyyyy', {monthStart: true});
+    const [sToYear, sToMonth, sToDay] = this._filter.toDate ? this._filter.toDate.split('-') : DateService.getDate('ddmmyyyy', {monthEnd: true});
     for (const order of orders) {
       const [sOrderMonth, sOrderDay, sOrderYear] = order.date.split('/');
       const bYearInRange = ((+sOrderYear) >= (+sFromYear) && (+sOrderYear) <= (+sToYear));
@@ -71,5 +71,19 @@ export class OrdersService {
     }
     filteredOrders = filteredOrders.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
     return filteredOrders;
+  }
+  getNextOrderNumber(orders$: Observable<Order[]>): Observable<string> {
+    const aDate = DateService.getDate('ddmmyyyy', {}).split('-');
+    const sMonth = aDate[1];
+    const sYear = aDate[2].slice(2);
+    return orders$.pipe(
+      map((orders) => {
+        const sOrderMonth = (order: Order) =>  order.date.split('/')[0];
+        const monthlyOrders = orders.filter(o =>  sOrderMonth(o) === sMonth)
+        const iOrderNumber = monthlyOrders.length + 1;
+        const sOrderNumber = iOrderNumber < 10 ? '00' + iOrderNumber : iOrderNumber < 100 ? '0' + iOrderNumber : iOrderNumber;
+        return `S${sYear}-${sMonth}${sOrderNumber}`;
+      })
+    )
   }
 }

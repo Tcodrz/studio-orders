@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { select, Store } from '@ngrx/store';
-import { map, Observable, of } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Observable, of } from 'rxjs';
 import { AppState } from '../state';
 import { Order } from './../state/api-interface/order.interface';
 import * as OrderFilterActions from './../state/orders-filter/orders-filter.actions';
@@ -16,30 +16,22 @@ import { OrdersService } from './services/orders.service';
 })
 export class OrdersComponent implements OnInit {
   filterObject$: Observable<FilterObject> = of(initialFilterObject);
+  filterObject: FilterObject = initialFilterObject;
   orders: Order[] = [];
-  orders$: Observable<Order[]> = of([]);
+  allOrders: Order[] = [];
   constructor(
     private store: Store<AppState>,
     private ordersService: OrdersService
   ) { }
   ngOnInit(): void {
     this.store.dispatch(loadOrders());
-    this.filterObject$ = this.store.select('filter').pipe(map(filterState => filterState.filter));
-    this.orders$ = this.store.pipe(
-      select('orders'),
-      map(state => state.orders)
-    );
-    this.getOrders();
+    this.store.subscribe(({ filter, orders }) => {
+      this.filterObject = filter.filter;
+      this.allOrders = orders.orders;
+      this.updateOrders();
+    })
   }
-  getOrders(): void {
-    this.orders$.subscribe(orders => this.orders = this.ordersService.filterOrders(orders));
-  }
-  handleFilterEvent(filterObject: FilterObject): void {
-    this.store.dispatch(OrderFilterActions.update({ payload: filterObject }));
-    this.getOrders();
-  }
-  handleFilterResetEvent(): void {
-    this.store.dispatch(OrderFilterActions.reset());
-    this.getOrders();
-  }
+  private updateOrders(): void { this.orders = this.ordersService.filterOrders(this.allOrders); }
+  handleFilterEvent(filterObject: FilterObject): void { this.store.dispatch(OrderFilterActions.update({ payload: filterObject })); }
+  handleFilterResetEvent(): void { this.store.dispatch(OrderFilterActions.reset()); }
 }
