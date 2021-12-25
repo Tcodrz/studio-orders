@@ -1,4 +1,4 @@
-import { AppGuard } from './../shared/guards/app.guard';
+import { AppGuard } from '../core/guards/app.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { OrdersComponent } from './orders.component';

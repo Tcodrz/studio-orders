@@ -1,16 +1,15 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { MenuItem } from 'primeng/api';
 import { AppState } from 'src/app/state';
 import { logout } from 'src/app/state/user/user.actions';
-import { User } from './../../state/api-interface/user.interface';
+import { User } from '../../../state/api-interface/user.interface';
 
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToolbarComponent {
   @Input() user!: User;

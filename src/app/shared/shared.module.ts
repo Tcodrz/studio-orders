@@ -2,14 +2,12 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { PrimeModule } from './../prime/prime.module';
-import { GenericTableComponent } from './generic-table/generic-table.component';
-import { LoaderComponent } from './loader/loader.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { ToolbarComponent } from './toolbar/toolbar.component';
+import { GenericTableComponent } from './components/generic-table/generic-table.component';
+import { LoaderComponent } from './components/loader/loader.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 @NgModule({
   declarations: [
-    NavbarComponent,
     ToolbarComponent,
     LoaderComponent,
     GenericTableComponent
@@ -20,7 +18,6 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     PrimeModule
   ],
   exports: [
-    NavbarComponent,
     ToolbarComponent,
     LoaderComponent,
     GenericTableComponent

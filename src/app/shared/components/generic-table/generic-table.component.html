@@ -1,19 +1,18 @@
 <div class="card">
-  <p-table [value]="value" [columns]="cols" [resizableColumns]="true" columnResizeMode="expand"
+  <p-table [value]="_value" [columns]="cols" [resizableColumns]="true" columnResizeMode="expand"
     responsiveLayout="scroll" styleClass="p-datatable-gridlines">
     <ng-template pTemplate="header">
       <tr>
         <th *ngFor="let column of cols" [pSortableColumn]="column.field">
           {{ column.header }}
+          <p-sortIcon [field]="column.field"></p-sortIcon>
         </th>
         <th *ngIf="bWithActions">פעולות</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-rowData let-columns="columns">
       <tr style="text-align: center;">
-        <td *ngFor="let col of columns">
-          {{ rowData[col.field] }}
-        </td>
+        <td *ngFor="let col of columns">{{ rowData[col.field] }}</td>
         <td *ngIf="bWithActions">
           <ng-container [ngTemplateOutlet]="orderActions"></ng-container>
         </td>
